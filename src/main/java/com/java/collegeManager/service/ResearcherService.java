@@ -4,6 +4,8 @@ import com.java.collegeManager.DAO.ResearcherDAO;
 import com.java.collegeManager.DAO.implement.mysql.ResearcherMySQL;
 import com.java.collegeManager.model.Researcher;
 import com.java.collegeManager.model.Staff;
+import com.java.collegeManager.utils.ShowAlert;
+import javafx.scene.control.Alert;
 
 import java.net.IDN;
 import java.time.LocalDate;
