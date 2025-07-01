@@ -29,6 +29,12 @@ public class SystemSettingController {
     private TextField newName;
 
     @FXML
+    public void initialize(){
+        name.setText(mainController.getName());
+        headPicture.setImage(mainController.getHeadPicture());
+    }
+
+    @FXML
     private void handleChangeName(){
         String NewName=newName.getText();
         if(NewName.isEmpty()){
