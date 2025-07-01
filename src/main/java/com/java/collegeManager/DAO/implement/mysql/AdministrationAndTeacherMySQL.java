@@ -36,6 +36,10 @@ public class AdministrationAndTeacherMySQL implements AdministrationAndTeacherDA
 
     @Override
     public void updateAdministrationAndTeacher(String uniqueID, String propertyName, String information) {
+        if(propertyName.equals("uniqueID")&&findStaffByUniqueID(information)){
+            ShowAlert.show("警告","编辑ID错误,保存失败","出现重复ID，数据库将不做更新", Alert.AlertType.WARNING);
+            throw new RuntimeException("修改失败!ID已经存在!");
+        }
         // 根据 uniqueID 和 propertyName查询指定位置，并用information更新数据
         // 注意：实际项目中应对propertyName进行安全检查以防止SQL注入
         String sql = "UPDATE administration_teacher SET " + propertyName + " = ? WHERE unique_id = ? AND is_deleted = 0";
