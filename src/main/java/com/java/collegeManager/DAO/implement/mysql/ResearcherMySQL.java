@@ -35,6 +35,10 @@ public class ResearcherMySQL implements ResearcherDAO {
 
     @Override
     public void updateResearcher(String uniqueID, String propertyName, String information) {
+        if(propertyName.equals("uniqueID")&&findStaffByUniqueID(information)){
+            ShowAlert.show("警告","编辑ID错误,保存失败","出现重复ID，数据库将不做更新", Alert.AlertType.WARNING);
+            throw new RuntimeException("修改失败!ID已经存在!");
+        }
         // 根据 uniqueID 和propertyName查询指定位置，并用information更新数据
         String sql = "UPDATE researchers SET " + propertyName + " = ? WHERE unique_id = ? AND is_deleted = 0";
 
