@@ -1,0 +1,106 @@
+/* addStaffWindowStyle.css - 高校员工管理系统添加员工样式 */
+
+.root {
+    -fx-background-color: #f5f7fa;
+    -fx-font-family: "Microsoft YaHei UI";
+    -fx-font-size: 14px;
+}
+
+/* 顶部工具栏样式 */
+.top-toolbar {
+    -fx-background-color: linear-gradient(to right, #4b6cb7, #182848);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 6, 0, 0, 2);
+    -fx-padding: 0 0 15px 0;
+}
+
+/* 按钮通用样式 */
+.action-button {
+    -fx-background-color: #fff;
+    -fx-text-fill: #182848;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 18px;
+    -fx-padding: 8px 24px;
+    -fx-min-width: 80px; /* 防止文字被截断 */
+    -fx-cursor: hand;
+}
+
+.action-button:hover {
+    -fx-background-color: #eef2ff;
+}
+
+.action-button:pressed {
+    -fx-background-color: #d0d9ff;
+}
+
+/* 下拉选择框 */
+.choice-box {
+    -fx-background-color: #fff;
+    -fx-border-color: #a5a5a5;
+    -fx-border-radius: 4px;
+    -fx-pref-height: 36px;
+    -fx-pref-width: 150px; /* 确保宽度足够 */
+    -fx-min-width: 150px;
+}
+
+/* 表单区域网格 */
+.form-grid {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 20px 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 1);
+}
+
+/* 修复年龄标签和Spinner的错位问题 */
+.form-grid .spinner {
+    -fx-pref-height: 38px;
+    -fx-pref-width: 120px;
+    -fx-background-color: #f8f9fb;
+    -fx-border-color: #d1d9e6;
+    -fx-border-radius: 5px;
+}
+
+/* 特别处理年龄标签 */
+.form-label {
+    -fx-text-fill: #444;
+    -fx-font-size: 14px;
+    -fx-padding: 10px 0 0 5px; /* 垂直居中 */
+}
+
+/* 文本输入框 - 确保文本显示完整 */
+.text-field {
+    -fx-pref-height: 38px;
+    -fx-min-width: 180px; /* 防止文字变省略号 */
+    -fx-background-color: #f8f9fb;
+    -fx-border-color: #d1d9e6;
+    -fx-border-radius: 5px;
+    -fx-padding: 0 12px;
+}
+
+.text-field:focused {
+    -fx-border-color: #4b6cb7;
+    -fx-border-width: 1.5;
+}
+
+/* 提示文本样式 */
+.text-field .prompt-text {
+    -fx-fill: #8898aa;
+}
+
+/* SplitPane分隔条 */
+.split-pane-divider {
+    -fx-background-color: transparent;
+    -fx-padding: 0 1px;
+}
+
+/* Spinner箭头按钮 */
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #e5e9f2;
+    -fx-padding: 5px;
+}
+
+.spinner:focused {
+    -fx-border-color: #4b6cb7;
+}

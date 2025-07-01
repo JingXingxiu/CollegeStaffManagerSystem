@@ -1,0 +1,122 @@
+/* StaffManagerStyle.css - 员工管理页面样式 */
+
+.root {
+    -fx-background-color: #f5f7fa;
+}
+
+.split-pane-divider {
+    -fx-background-color: #bdc3c7;
+}
+
+/* 头部搜索区域 */
+.hbox {
+    -fx-background-color: #ffffff;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 8, 0, 0, 1);
+    -fx-border-color: #e0e6ed;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 15px 0 20px 0;
+}
+
+/* 搜索输入框 */
+.text-field {
+    -fx-pref-height: 40px;
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #d1d9e6;
+    -fx-border-radius: 5px;
+    -fx-padding: 0 12px;
+    -fx-font-size: 14px;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 1.5;
+}
+
+/* 统计标签 */
+.label {
+    -fx-text-fill: #2c3e50;
+    -fx-font-size: 18px;
+}
+
+#men, #women, #peopleSum {
+    -fx-font-weight: bold;
+}
+
+#men {
+    -fx-text-fill: #3498db;  /* 蓝色表示男性 */
+}
+
+#women {
+    -fx-text-fill: #e74c3c;  /* 红色表示女性 */
+}
+
+#peopleSum {
+    -fx-text-fill: #2c3e50;  /* 深色表示总数 */
+}
+
+/* 按钮样式 */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-min-width: 80px;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+/* 删除按钮特殊样式 */
+.button:disabled {
+    -fx-background-color: #bdc3c7;
+}
+
+/* 表格通用样式 */
+.table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: #d1d9e6;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 0;
+}
+
+/* 列头样式 */
+.table-view .column-header {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* 表格单元格样式 */
+.table-view .table-cell {
+    -fx-padding: 10px;
+    -fx-border-color: #f1f5f9;
+    -fx-alignment: CENTER;
+}
+
+/* 斑马条纹效果 */
+.table-row-cell:even {
+    -fx-background-color: #f8fafc;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #ffffff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #d6eaf8;
+}
+
+/* 垂直滚动条 */
+.table-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+
+/* 水平滚动条 */
+.table-view .scroll-bar:horizontal {
+    -fx-background-color: transparent;
+}

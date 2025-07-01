@@ -1,0 +1,96 @@
+/* SystemStyle.css - 系统设置页面样式 */
+
+.root {
+    -fx-background-color: #f0f4f8;
+    -fx-font-family: "Segoe UI", "Microsoft YaHei UI";
+}
+
+.split-pane-divider {
+    -fx-background-color: #cbd5e1;
+}
+
+/* 顶部信息区域 */
+.hbox {
+    -fx-background-color: linear-gradient(to right, #3498db, #2c3e50);
+    -fx-padding: 20px;
+    -fx-spacing: 30px;
+    -fx-alignment: center;
+}
+
+/* 昵称标签样式 */
+#name {
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 3, 0, 0, 1);
+}
+
+/* 头像样式 */
+#headPicture {
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 3);
+    -fx-border-color: white;
+    -fx-border-width: 3px;
+    -fx-border-radius: 5px;
+}
+
+/* 设置区域网格 */
+.grid-pane {
+    -fx-background-color: #ffffff;
+    -fx-padding: 40px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 3);
+}
+
+/* 按钮样式 */
+.button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 6px;
+    -fx-padding: 12px 24px;
+    -fx-cursor: hand;
+    -fx-min-width: 160px;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9;
+}
+
+.button:pressed {
+    -fx-background-color: #1d6fa5;
+}
+
+/* 特殊按钮样式 */
+#handleResetAll {
+    -fx-background-color: #e74c3c;
+}
+
+#handleResetAll:hover {
+    -fx-background-color: #c0392b;
+}
+
+#handleResetAll:pressed {
+    -fx-background-color: #a52d21;
+}
+
+/* 输入框样式 */
+.text-field {
+    -fx-pref-height: 40px;
+    -fx-background-color: #f8fafc;
+    -fx-border-color: #cbd5e1;
+    -fx-border-radius: 5px;
+    -fx-padding: 0 12px;
+    -fx-font-size: 16px;
+}
+
+.text-field:focused {
+    -fx-border-color: #3498db;
+    -fx-border-width: 1.5;
+}
+
+/* 标签样式 */
+.label {
+    -fx-text-fill: #2d3748;
+    -fx-font-size: 18px;
+}
