@@ -189,5 +189,11 @@ public class MainController {
 
     public void addStaffShow(String name,String uniqueID,String gender,String operation,int age,LocalDate entryDate){
         StaffShow newStaff = new StaffShow(name, uniqueID, gender, age, entryDate, operation);
+        staffTableView.getItems().add(newStaff);
+    }
+
+    public void deleteStaffShow(String name,String uniqueID,String gender,String operation,int age,LocalDate entryDate){
+        StaffShow newStaff = new StaffShow(name, uniqueID, gender, age, entryDate, operation);
+        staffTableView.getItems().add(newStaff);
     }
 }
