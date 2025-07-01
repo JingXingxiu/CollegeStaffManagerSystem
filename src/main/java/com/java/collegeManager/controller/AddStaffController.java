@@ -74,6 +74,7 @@ public class AddStaffController {
         handleReset();
         titleOrPosition.setPromptText("职称");
         political.setVisible(false);
+        facultyOrLaboratory.setVisible(true);
         facultyOrLaboratory.setPromptText("学院");
         major.setVisible(true);
     }
@@ -82,6 +83,7 @@ public class AddStaffController {
         handleReset();
         titleOrPosition.setPromptText("职务");
         major.setVisible(false);
+        facultyOrLaboratory.setVisible(true);
         facultyOrLaboratory.setPromptText("实验室");
         political.setVisible(false);
     }
@@ -99,6 +101,7 @@ public class AddStaffController {
         titleOrPosition.setPromptText("职称");
         political.setVisible(true);
         political.setVisible(true);
+        facultyOrLaboratory.setVisible(true);
         facultyOrLaboratory.setPromptText("学院");
         major.setVisible(true);
     }
