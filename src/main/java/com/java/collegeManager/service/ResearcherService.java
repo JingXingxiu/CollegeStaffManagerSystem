@@ -66,7 +66,10 @@ public class ResearcherService implements StaffService{
     public List<Researcher> findStaff(String information) {
         if(researcherMySQL.findStaffByName(information)) return researcherMySQL.getResearcherByName(information);
         else if(researcherMySQL.findStaffByUniqueID(information)) return researcherMySQL.getResearcherByUniqueID(information);
-        else ShowAlert.show("警告","找不到对应的员工","请检查姓名或ID是否输入正确", Alert.AlertType.WARNING);
+        else {
+            ShowAlert.show("警告", "找不到对应的员工", "请检查姓名或ID是否输入正确", Alert.AlertType.WARNING);
+            throw new IllegalArgumentException("找不到对应员工");
+        }
 //        else throw new IllegalArgumentException("找不到对应员工");/// 其实这里非常适合用自定义异常类！
     }
 
