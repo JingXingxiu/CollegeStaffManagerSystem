@@ -72,7 +72,7 @@ public class StaffManagerController<Type extends Staff> {
         /// 其实这里都可以用异常类来写，但是时间不够充裕，算了！
         if(selectedItems.isEmpty()) ShowAlert.show("删除失败","请选择要删除的员工","无选中项", Alert.AlertType.WARNING);
         else{
-            ShowAlert.show("删除成功","员工记录已被删除","主页面可撤销操作",Alert.AlertType.CONFIRMATION);
+            ShowAlert.show("删除成功","员工记录已被删除","主页面刷新可查看",Alert.AlertType.CONFIRMATION);
             for(Type staff:selectedItems) staffManagerControllerService.deleteStaff(staff.getUniqueID());
             staffTableView.getItems().removeAll(selectedItems);
         }
