@@ -53,10 +53,10 @@ public class StaffManagerControllerService <T>{
     }
 
     public String getPeopleSumNumber(){
-        if(name.equals("Teacher")) return String.valueOf(teacherService.getMenNumber());
-        else if(name.equals("Researcher")) return String.valueOf(researcherService.getMenNumber());
-        else if(name.equals("Administration")) return String.valueOf(administrationService.getMenNumber());
-        else if(name.equals("AdministrationAndTeacher")) return String.valueOf(administrationAndTeacherService.getMenNumber());
+        if(name.equals("Teacher")) return String.valueOf(teacherService.getTotalNumber());
+        else if(name.equals("Researcher")) return String.valueOf(researcherService.getTotalNumber());
+        else if(name.equals("Administration")) return String.valueOf(administrationService.getTotalNumber());
+        else if(name.equals("AdministrationAndTeacher")) return String.valueOf(administrationAndTeacherService.getTotalNumber());
         else throw new RuntimeException("出问题了！");
     }
 
