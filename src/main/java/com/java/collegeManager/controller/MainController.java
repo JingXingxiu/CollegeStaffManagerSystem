@@ -75,6 +75,15 @@ public class MainController {
         // 初始化TableView的数据源（ObservableList）
         staffTableView.setItems(FXCollections.observableArrayList());
     }
+
+    public String getName(){
+        return Name.getText();
+    }
+
+    public Image getHeadPicture(){
+        return headPicture.getImage();
+    }
+
     @FXML
     private void handleOpenTeacher() throws Exception {
         FXMLLoader fxmlLoader=new FXMLLoader(getClass().getResource("/view/StaffManager.fxml"));
