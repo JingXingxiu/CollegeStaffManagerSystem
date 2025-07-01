@@ -24,7 +24,7 @@ public class StaffManagerControllerService <T>{
     public void updateAdministrationAndTeacher(String uniqueID,String propertyName,String information){
         administrationAndTeacherService.updateAdministrationAndTeacher(uniqueID,propertyName,information);
     }
-
+/// 首先这里的异常抛出很有问题，其次这里应该把删除的信息传给主页面！
     public void deleteStaff(String id){
         if(teacherService.findStaffExist(id)) teacherService.deleteStaff(id,true);
         else if(researcherService.findStaffExist(id)) researcherService.deleteStaff(id,true);
