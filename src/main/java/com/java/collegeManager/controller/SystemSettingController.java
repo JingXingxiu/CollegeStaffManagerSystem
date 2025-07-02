@@ -11,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.URL;
 
 public class SystemSettingController {
     private MainController mainController=null;
@@ -28,10 +29,14 @@ public class SystemSettingController {
     @FXML
     private TextField newName;
 
-    @FXML
-    public void initialize(){
+    public void init(){
         name.setText(mainController.getName());
         headPicture.setImage(mainController.getHeadPicture());
+    }
+
+    /// 空初始化，否则直接设置名字和图片会因为加载调用失败而出空指针
+    @FXML
+    public void initialize(){
     }
 
     @FXML
@@ -44,7 +49,7 @@ public class SystemSettingController {
             alert.setContentText("请重试！");
             alert.showAndWait();
         }else{
-            name.setText("昵称"+NewName);
+            name.setText(NewName);
             mainController.setName(NewName);
         }
     }

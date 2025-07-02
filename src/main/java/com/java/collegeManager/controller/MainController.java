@@ -130,8 +130,8 @@ public class MainController {
         settingStage.setResizable(false);
         SystemSettingController systemSettingController=fxmlLoader.getController();
         systemSettingController.setMainController(this);
+        systemSettingController.init();
         settingStage.initModality(Modality.APPLICATION_MODAL);
-
         settingStage.show();
     }
 
