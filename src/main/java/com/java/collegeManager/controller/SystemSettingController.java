@@ -69,9 +69,25 @@ public class SystemSettingController {
 
     @FXML
     private void handleResetAll(){
-        name.setText("昵称：37");
-        mainController.setName(name.getText());
-        headPicture.setImage(new Image(getClass().getResource("img/头像37.JPG").toExternalForm()));
-        mainController.setHeadPicture(new Image(getClass().getResource("img/头像37.JPG").toExternalForm()));
+        try {
+            // 1. 设置昵称
+            name.setText("37");
+            mainController.setName(name.getText());
+
+            // 2. 安全加载图片（关键修改！）
+            URL imageUrl = getClass().getResource("/img/头像37.JPG"); // 添加斜杠前缀
+            if (imageUrl == null) {
+                throw new IllegalStateException("图片资源未找到: /img/头像37.JPG");
+            }
+            Image profileImage = new Image(imageUrl.toExternalForm());
+
+            // 3. 更新图片
+            headPicture.setImage(profileImage);
+            mainController.setHeadPicture(profileImage);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "重置失败: " + e.getMessage()).show();
+        }
     }
 }
