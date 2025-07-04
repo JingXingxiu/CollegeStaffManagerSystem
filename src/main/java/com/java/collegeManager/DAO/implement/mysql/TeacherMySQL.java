@@ -2,6 +2,7 @@ package com.java.collegeManager.DAO.implement.mysql;
 
 import com.java.collegeManager.DAO.TeacherDAO;
 import com.java.collegeManager.model.Teacher;
+import com.java.collegeManager.utils.CalculatorUtil;
 import com.java.collegeManager.utils.DBConnectionUtil;
 import com.java.collegeManager.utils.ShowAlert;
 import javafx.scene.control.Alert;
@@ -23,7 +24,7 @@ public class TeacherMySQL implements TeacherDAO {
         unique_id VARCHAR(50) PRIMARY KEY,  -- 员工唯一ID
         name VARCHAR(100) NOT NULL,        -- 姓名
         gender VARCHAR(10) NOT NULL,        -- 性别
-        age INT NOT NULL,                   -- 年龄
+        birthday DATE NOT NULL,                   -- 出生日期
         entry_date DATE NOT NULL,           -- 入职日期
         faculty VARCHAR(100) NOT NULL,      -- 所属院系
         major VARCHAR(100),                 -- 专业（教师特有）
@@ -122,7 +123,7 @@ public class TeacherMySQL implements TeacherDAO {
 
     @Override
     public void addTeacher(Teacher teacher) {
-        String sql = "INSERT INTO teachers (unique_id, name, gender, age, entry_date, faculty, major, title) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO teachers (unique_id, name, gender, birthday, entry_date, faculty, major, title) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -178,12 +179,14 @@ public class TeacherMySQL implements TeacherDAO {
 
     // ================ 辅助方法 ================
     private Teacher createTeacherFromResultSet(ResultSet rs) throws SQLException {
+        LocalDate birthday=rs.getDate("birthday").toLocalDate();
+        int age= CalculatorUtil.calculateAge(birthday);
         return new Teacher(
                 rs.getString("unique_id"),
                 rs.getString("name"),
                 rs.getString("gender"),
-                rs.getInt("age"),
                 rs.getDate("entry_date").toLocalDate(),
+                age,
                 rs.getString("faculty"),
                 rs.getString("major"),
                 rs.getString("title")
@@ -194,7 +197,7 @@ public class TeacherMySQL implements TeacherDAO {
         pstmt.setString(1, teacher.getUniqueID());
         pstmt.setString(2, teacher.getName());
         pstmt.setString(3, teacher.getGender());
-        pstmt.setInt(4, teacher.getAge());
+        pstmt.setDate(4, Date.valueOf(teacher.getBirthday()));
         pstmt.setDate(5, Date.valueOf(teacher.getEntryDate()));
         pstmt.setString(6, teacher.getFaculty());
         pstmt.setString(7, teacher.getMajor());

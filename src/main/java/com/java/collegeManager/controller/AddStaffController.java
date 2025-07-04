@@ -5,11 +5,13 @@ import com.java.collegeManager.model.AdministrationAndTeacher;
 import com.java.collegeManager.model.Researcher;
 import com.java.collegeManager.model.Teacher;
 import com.java.collegeManager.service.*;
+import com.java.collegeManager.utils.CalculatorUtil;
 import com.java.collegeManager.utils.ShowAlert;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 public class AddStaffController {
@@ -39,7 +41,7 @@ public class AddStaffController {
     private TextField gender;
 
     @FXML
-    private Spinner<Integer> age;
+    private DatePicker date;
 
     @FXML
     private TextField titleOrPosition;
@@ -60,13 +62,25 @@ public class AddStaffController {
         choiceBox.setValue("教师");
         flag="教师";
         political.setVisible(false);
-        age.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,130,25));
         choiceBox.valueProperty().addListener((obs,oldValue,newValue)->{
             if(newValue.equals("教师")) handleChangeTeacher();
             else if(newValue.equals("研究员")) handleChangeResearcher();
             else if(newValue.equals("行政人员")) handleChangeAdministration();
             else handleChangeAdministrationAndTeacher();
             flag=newValue;
+        });
+        /// 设置一般情况
+        date.setOnShowing((event -> {
+            date.setValue(LocalDate.of(2005,1,1));
+        }));
+        /// 设置最早时间
+        date.setDayCellFactory(picker->new DateCell(){
+            @Override
+            public void updateItem(LocalDate d,boolean empty){
+                super.updateItem(d,empty);
+///                setDisable(d.isBefore(LocalDate.of(1900,1,1)));
+                setDisable(d.isBefore(LocalDate.of(CalculatorUtil.calculateYearToToday(150),1,1)));
+            }
         });
     }
 
@@ -129,9 +143,14 @@ public class AddStaffController {
             ShowAlert.show("警告", "性别为空", "请选择性别", Alert.AlertType.WARNING);
             return;
         }
-
-// 检查年龄是否有效
-        if (age.getValue() == null || age.getValue() < 18) {
+        if(date.getValue()==null) {
+            ShowAlert.show("警告","日期为空","请输入正确出生日期", Alert.AlertType.WARNING);
+            throw new IllegalArgumentException("出生日期错误！");
+        }
+        LocalDate selectedDate=date.getValue();
+        int age = CalculatorUtil.calculateAge(selectedDate);
+        // 检查年龄是否有效
+        if (age< 18) {
             ShowAlert.show("警告", "年龄无效", "年龄必须大于18岁", Alert.AlertType.WARNING);
             return;
         }
@@ -159,7 +178,7 @@ public class AddStaffController {
                     return;
                 }
                 teacherService.addStaff(new Teacher(uniqueID.getText(),
-                    name.getText(), gender.getText(), age.getValue(), LocalDate.now(),
+                    name.getText(), gender.getText(), selectedDate, LocalDate.now(),
                     facultyOrLaboratory.getText(), major.getText(), titleOrPosition.getText()));
             }
             case "研究员" -> {
@@ -172,7 +191,7 @@ public class AddStaffController {
                     return;
                 }
                 researcherService.addStaff(new Researcher(uniqueID.getText(),
-                    name.getText(), gender.getText(), age.getValue(), LocalDate.now(),
+                    name.getText(), gender.getText(), selectedDate, LocalDate.now(),
                     facultyOrLaboratory.getText(), titleOrPosition.getText()));
             }
             case "行政人员" -> {
@@ -185,7 +204,7 @@ public class AddStaffController {
                     return;
                 }
                 administrationService.addStaff(new Administration(uniqueID.getText(),
-                    name.getText(), gender.getText(), age.getValue(), LocalDate.now(),
+                    name.getText(), gender.getText(), selectedDate, LocalDate.now(),
                     titleOrPosition.getText(), political.getText()));
             }
             case "行政老师" -> {
@@ -206,7 +225,7 @@ public class AddStaffController {
                     return;
                 }
                 administrationAndTeacherService.addStaff(new AdministrationAndTeacher(uniqueID.getText(), name.getText(),
-                        gender.getText(), age.getValue(), LocalDate.now(), political.getText(),
+                        gender.getText(), selectedDate, LocalDate.now(), political.getText(),
                         facultyOrLaboratory.getText(), major.getText(), titleOrPosition.getText()));
             }
             default -> {
@@ -233,7 +252,7 @@ public class AddStaffController {
                 System.out.println("          佛祖保佑             永无BUG");
             }/// 哈哈哈，屎山雕花
         }
-        mainController.addStaffShow(name.getText(), uniqueID.getText(), gender.getText(), "增加", age.getValue(), LocalDate.now());
+        mainController.addStaffShow(name.getText(), uniqueID.getText(), gender.getText(), "增加", age, LocalDate.now());
         ShowAlert.show("添加成功","员工已经成功添加","可在主页面刷新查看", Alert.AlertType.CONFIRMATION);
         handleReset();
     }
@@ -265,7 +284,7 @@ public class AddStaffController {
     @FXML
     private void handleReset(){
         name.clear();
-        age.getEditor().clear();
+        date.getEditor().clear();
         uniqueID.clear();
         titleOrPosition.clear();
         political.clear();

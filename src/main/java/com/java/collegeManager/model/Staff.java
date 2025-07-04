@@ -6,14 +6,32 @@ public abstract class Staff {
     private String uniqueID;
     private String name;
     private String gender;
-    private int age;
+    private LocalDate birthday;
     private LocalDate entryDate;
-    public Staff(String uniqueID, String name, String gender, int age,LocalDate entryDate) {
+    private int age;
+
+    public Staff(String uniqueID, String name, String gender, LocalDate entryDate, int age) {
         this.uniqueID = uniqueID;
         this.name = name;
         this.gender = gender;
+        this.entryDate = entryDate;
         this.age = age;
+    }
+
+    public Staff(String uniqueID, String name, String gender, LocalDate birthday, LocalDate entryDate) {
+        this.uniqueID = uniqueID;
+        this.name = name;
+        this.gender = gender;
+        this.birthday=birthday;
         this.entryDate=entryDate;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public LocalDate getEntryDate() {
@@ -36,8 +54,8 @@ public abstract class Staff {
         this.gender = gender;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
     }
 
     public String getUniqueID() {
@@ -52,7 +70,7 @@ public abstract class Staff {
         return gender;
     }
 
-    public int getAge() {
-        return age;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 }

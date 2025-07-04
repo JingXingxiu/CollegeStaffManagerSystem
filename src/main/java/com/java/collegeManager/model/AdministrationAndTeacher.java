@@ -8,8 +8,16 @@ public class AdministrationAndTeacher extends Staff{
     private String major;
     private String title;
 
-    public AdministrationAndTeacher(String uniqueID, String name, String gender, int age, LocalDate entryDate, String political, String faculty, String major, String title) {
-        super(uniqueID, name, gender, age, entryDate);
+    public AdministrationAndTeacher(String uniqueID, String name, String gender, LocalDate entryDate, int age, String political, String faculty, String major, String title) {
+        super(uniqueID, name, gender, entryDate, age);
+        this.political = political;
+        this.faculty = faculty;
+        this.major = major;
+        this.title = title;
+    }
+
+    public AdministrationAndTeacher(String uniqueID, String name, String gender, LocalDate birthday, LocalDate entryDate, String political, String faculty, String major, String title) {
+        super(uniqueID, name, gender, birthday, entryDate);
         this.political = political;
         this.faculty = faculty;
         this.major = major;

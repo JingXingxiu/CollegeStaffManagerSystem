@@ -51,12 +51,6 @@
     -fx-font-size: 14px;
 }
 
-.stats-grid .label:fx-id {
-    -fx-font-size: 18px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50;
-}
-
 /* 表格视图样式 */
 .table-view {
     -fx-background-color: transparent;
@@ -109,9 +103,9 @@
 }
 
 /* 开发者标签 */
-.label:underline {
-    -fx-text-fill: #7f8c8d;
-    -fx-font-size: 12px;
+#developer {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
 }
 
 /* 分隔线 */

@@ -6,8 +6,14 @@ public class Researcher extends Staff{
     private String laboratory;
     private String position;
 
-    public Researcher(String uniqueID, String name, String gender, int age, LocalDate entryDate, String laboratory, String position) {
-        super(uniqueID, name, gender, age,entryDate);
+    public Researcher(String uniqueID, String name, String gender, LocalDate birthday, LocalDate entryDate, String laboratory, String position) {
+        super(uniqueID, name, gender, birthday,entryDate);
+        this.laboratory = laboratory;
+        this.position = position;
+    }
+
+    public Researcher(String uniqueID, String name, String gender, LocalDate entryDate, String laboratory, String position, int age) {
+        super(uniqueID, name, gender, entryDate, age);
         this.laboratory = laboratory;
         this.position = position;
     }

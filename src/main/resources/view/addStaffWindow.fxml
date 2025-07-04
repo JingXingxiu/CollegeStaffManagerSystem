@@ -3,8 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -72,21 +71,11 @@
                         <Insets bottom="10.0" left="20.0" right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                   <Spinner fx:id="age" editable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                       <GridPane.margin>
-                           <Insets bottom="10.0" left="60.0" right="20.0" /> <!-- 增加左边距 -->
-                       </GridPane.margin>
-                   </Spinner>
                   <TextField fx:id="titleOrPosition" promptText="职称" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" />
                      </GridPane.margin>
                   </TextField>
-                   <Label styleClass="form-label" text="年龄" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                       <GridPane.margin>
-                           <Insets bottom="10.0" left="20.0" right="5.0" /> <!-- 减小右边距 -->
-                       </GridPane.margin>
-                   </Label>
                   <TextField fx:id="political" promptText="政治面貌" GridPane.rowIndex="3">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="20.0" right="20.0" />
@@ -97,6 +86,11 @@
                         <Insets bottom="10.0" left="20.0" right="20.0" />
                      </GridPane.margin>
                   </TextField>
+                  <DatePicker fx:id="date" promptText="出生日期" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <GridPane.margin>
+                        <Insets left="25.0" />
+                     </GridPane.margin>
+                  </DatePicker>
                </children>
                <padding>
                   <Insets top="20.0" />

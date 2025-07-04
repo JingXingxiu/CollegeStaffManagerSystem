@@ -19,8 +19,15 @@ public class Teacher extends Staff{
         return title;
     }
 
-    public Teacher(String uniqueID, String name, String gender, int age, LocalDate entryDate, String faculty, String major, String title) {
-        super(uniqueID, name, gender, age,entryDate);
+    public Teacher(String uniqueID, String name, String gender, LocalDate entryDate, int age, String faculty, String major, String title) {
+        super(uniqueID, name, gender, entryDate, age);
+        this.faculty = faculty;
+        this.major = major;
+        this.title = title;
+    }
+
+    public Teacher(String uniqueID, String name, String gender, LocalDate birthday, LocalDate entryDate, String faculty, String major, String title) {
+        super(uniqueID, name, gender, birthday,entryDate);
         this.faculty = faculty;
         this.major = major;
         this.title = title;

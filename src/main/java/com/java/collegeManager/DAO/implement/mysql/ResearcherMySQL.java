@@ -2,6 +2,7 @@ package com.java.collegeManager.DAO.implement.mysql;
 
 import com.java.collegeManager.DAO.ResearcherDAO;
 import com.java.collegeManager.model.Researcher;
+import com.java.collegeManager.utils.CalculatorUtil;
 import com.java.collegeManager.utils.DBConnectionUtil;
 import com.java.collegeManager.utils.ShowAlert;
 import javafx.scene.control.Alert;
@@ -27,7 +28,7 @@ public class ResearcherMySQL implements ResearcherDAO {
         unique_id VARCHAR(50) PRIMARY KEY,  -- 员工唯一ID
         name VARCHAR(100) NOT NULL,         -- 姓名
         gender VARCHAR(10) NOT NULL,        -- 性别
-        age INT NOT NULL,                   -- 年龄
+        birthday DATE NOT NULL,                   -- 出生日期
         entry_date DATE NOT NULL,           -- 入职日期
         laboratory VARCHAR(100) NOT NULL,   -- 实验室
         position VARCHAR(100),              -- 职位
@@ -58,7 +59,7 @@ public class ResearcherMySQL implements ResearcherDAO {
 
     @Override
     public List<Researcher> getAllResearcher() {
-        // 返回所有的研究员 new Researcher (String uniqueID, String name, String gender, int age,
+        // 返回所有的研究员 new Researcher (String uniqueID, String name, String gender, LocalDate birthday,
         //     LocalDate entryDate, String laboratory, String position);
         List<Researcher> researchers = new ArrayList<>();
         String sql = "SELECT * FROM researchers WHERE is_deleted = 0";
@@ -135,7 +136,7 @@ public class ResearcherMySQL implements ResearcherDAO {
         // Researcher (String uniqueID, String name, String gender, int age,
         //     LocalDate entryDate, String laboratory, String position);
         // 有getter方法
-        String sql = "INSERT INTO researchers (unique_id, name, gender, age, entry_date, laboratory, position) "
+        String sql = "INSERT INTO researchers (unique_id, name, gender, birthday, entry_date, laboratory, position) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -204,14 +205,16 @@ public class ResearcherMySQL implements ResearcherDAO {
 
     // ================ 辅助方法 ================
     private Researcher createResearcherFromResultSet(ResultSet rs) throws SQLException {
+        LocalDate birthday=rs.getDate("birthday").toLocalDate();
+        int age= CalculatorUtil.calculateAge(birthday);
         return new Researcher(
                 rs.getString("unique_id"),
                 rs.getString("name"),
                 rs.getString("gender"),
-                rs.getInt("age"),
                 rs.getDate("entry_date").toLocalDate(),
                 rs.getString("laboratory"),
-                rs.getString("position")
+                rs.getString("position"),
+                age
         );
     }
 
@@ -219,7 +222,7 @@ public class ResearcherMySQL implements ResearcherDAO {
         pstmt.setString(1, researcher.getUniqueID());
         pstmt.setString(2, researcher.getName());
         pstmt.setString(3, researcher.getGender());
-        pstmt.setInt(4, researcher.getAge());
+        pstmt.setDate(4, Date.valueOf(researcher.getBirthday()));
         pstmt.setDate(5, Date.valueOf(researcher.getEntryDate()));
         pstmt.setString(6, researcher.getLaboratory());
         pstmt.setString(7, researcher.getPosition());

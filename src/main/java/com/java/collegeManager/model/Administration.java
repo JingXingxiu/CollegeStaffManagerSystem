@@ -4,10 +4,16 @@ import java.time.LocalDate;
 
 public class Administration extends Staff{
     private String title;    ///职称
-    private String political;   ///政治面貌
+    private String political;    ///政治面貌
 
-    public Administration(String uniqueID, String name, String gender, int age, LocalDate entryDate, String title, String political) {
-        super(uniqueID, name, gender, age,entryDate);
+    public Administration(String uniqueID, String name, String gender, LocalDate entryDate, int age, String title, String political) {
+        super(uniqueID, name, gender, entryDate, age);
+        this.title = title;
+        this.political = political;
+    }
+
+    public Administration(String uniqueID, String name, String gender, LocalDate birthday, LocalDate entryDate, String title, String political) {
+        super(uniqueID, name, gender, birthday, entryDate);
         this.title = title;
         this.political = political;
     }

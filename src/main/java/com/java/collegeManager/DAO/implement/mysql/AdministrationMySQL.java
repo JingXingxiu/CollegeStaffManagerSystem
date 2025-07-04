@@ -2,6 +2,7 @@ package com.java.collegeManager.DAO.implement.mysql;
 
 import com.java.collegeManager.DAO.AdministrationDAO;
 import com.java.collegeManager.model.Administration;
+import com.java.collegeManager.utils.CalculatorUtil;
 import com.java.collegeManager.utils.DBConnectionUtil;
 import com.java.collegeManager.utils.ShowAlert;
 import javafx.scene.control.Alert;
@@ -27,7 +28,7 @@ public class AdministrationMySQL implements AdministrationDAO {
         unique_id VARCHAR(50) PRIMARY KEY,  -- 员工唯一ID
         name VARCHAR(100) NOT NULL,         -- 姓名
         gender VARCHAR(10) NOT NULL,        -- 性别
-        age INT NOT NULL,                   -- 年龄
+        birthday DATE NOT NULL,                   -- 出生日期
         entry_date DATE NOT NULL,           -- 入职日期
         title VARCHAR(100) NOT NULL,        -- 行政职务
         political VARCHAR(50),              -- 政治面貌
@@ -132,7 +133,7 @@ public class AdministrationMySQL implements AdministrationDAO {
 
     @Override
     public void addAdministration(Administration administration) {
-        String sql = "INSERT INTO administration (unique_id, name, gender, age, entry_date, title, political) "
+        String sql = "INSERT INTO administration (unique_id, name, gender, birthday, entry_date, title, political) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -201,12 +202,14 @@ public class AdministrationMySQL implements AdministrationDAO {
 
     // ================ 辅助方法 ================
     private Administration createAdministrationFromResultSet(ResultSet rs) throws SQLException {
+        LocalDate birthday= rs.getDate("birthday").toLocalDate();
+        int age= CalculatorUtil.calculateAge(birthday);
         return new Administration(
                 rs.getString("unique_id"),
                 rs.getString("name"),
                 rs.getString("gender"),
-                rs.getInt("age"),
                 rs.getDate("entry_date").toLocalDate(),
+                age,
                 rs.getString("title"),
                 rs.getString("political")
         );
@@ -216,7 +219,7 @@ public class AdministrationMySQL implements AdministrationDAO {
         pstmt.setString(1, admin.getUniqueID());
         pstmt.setString(2, admin.getName());
         pstmt.setString(3, admin.getGender());
-        pstmt.setInt(4, admin.getAge());
+        pstmt.setDate(4, Date.valueOf(admin.getBirthday()));
         pstmt.setDate(5, Date.valueOf(admin.getEntryDate()));
         pstmt.setString(6, admin.getTitle());
         pstmt.setString(7, admin.getPolitical());

@@ -2,11 +2,13 @@ package com.java.collegeManager.DAO.implement.mysql;
 
 import com.java.collegeManager.DAO.AdministrationAndTeacherDAO;
 import com.java.collegeManager.model.AdministrationAndTeacher;
+import com.java.collegeManager.utils.CalculatorUtil;
 import com.java.collegeManager.utils.DBConnectionUtil;
 import com.java.collegeManager.utils.ShowAlert;
 import javafx.scene.control.Alert;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class AdministrationAndTeacherMySQL implements AdministrationAndTeacherDA
         unique_id VARCHAR(50) PRIMARY KEY,  -- 员工唯一ID
         name VARCHAR(100) NOT NULL,         -- 姓名
         gender VARCHAR(10) NOT NULL,        -- 性别
-        age INT NOT NULL,                   -- 年龄
+        birthday DATE NOT NULL,                   -- 出生日期
         entry_date DATE NOT NULL,           -- 入职日期
         political VARCHAR(50) NOT NULL,     -- 政治面貌
         faculty VARCHAR(100) NOT NULL,      -- 所属院系
@@ -139,7 +141,7 @@ public class AdministrationAndTeacherMySQL implements AdministrationAndTeacherDA
         // 将实例各个字段存入数据库，有对应的getter函数
         // AdministrationAndTeacher(String uniqueID, String name, String gender,
         //     int age, LocalDate entryDate, String political, String faculty, String major, String title);
-        String sql = "INSERT INTO administration_teacher (unique_id, name, gender, age, entry_date, political, faculty, major, title) "
+        String sql = "INSERT INTO administration_teacher (unique_id, name, gender, birthday, entry_date, political, faculty, major, title) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -209,12 +211,14 @@ public class AdministrationAndTeacherMySQL implements AdministrationAndTeacherDA
 
     // ================ 辅助方法 ================
     private AdministrationAndTeacher createAdminTeacherFromResultSet(ResultSet rs) throws SQLException {
+        LocalDate birthday=rs.getDate("birthday").toLocalDate();
+        int age= CalculatorUtil.calculateAge(birthday);
         return new AdministrationAndTeacher(
                 rs.getString("unique_id"),
                 rs.getString("name"),
                 rs.getString("gender"),
-                rs.getInt("age"),
                 rs.getDate("entry_date").toLocalDate(),
+                age,
                 rs.getString("political"),
                 rs.getString("faculty"),
                 rs.getString("major"),
@@ -227,7 +231,7 @@ public class AdministrationAndTeacherMySQL implements AdministrationAndTeacherDA
         pstmt.setString(1, adminTeacher.getUniqueID());
         pstmt.setString(2, adminTeacher.getName());
         pstmt.setString(3, adminTeacher.getGender());
-        pstmt.setInt(4, adminTeacher.getAge());
+        pstmt.setDate(4, Date.valueOf(adminTeacher.getBirthday()));
         pstmt.setDate(5, Date.valueOf(adminTeacher.getEntryDate()));
         pstmt.setString(6, adminTeacher.getPolitical());
         pstmt.setString(7, adminTeacher.getFaculty());

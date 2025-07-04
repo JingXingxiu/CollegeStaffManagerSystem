@@ -45,7 +45,7 @@ public class MainControllerService {
                 ShowAlert.show("删除成功", "已经成功删除员工", "刷新界面可以看到变化", Alert.AlertType.CONFIRMATION);
             }
         },()->{
-            ShowAlert.show("警告","空信息","请输入ID或姓名", Alert.AlertType.WARNING);
+            ShowAlert.show("确认","无输入","取消员工删除", Alert.AlertType.CONFIRMATION);
         });
     }
 
